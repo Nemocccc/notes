@@ -1,0 +1,136 @@
+{:blocks (
+{:block/content "《deep reinforcement learning》"
+:block/format :markdown
+:block/left 
+{:block/uuid #uuid "6682c777-b67f-486c-bcf6-acb102530109"}
+:block/parent 
+{:block/uuid #uuid "6682c777-b67f-486c-bcf6-acb102530109"}
+:block/properties 
+{}
+:block/uuid #uuid "6682c84c-d5d3-4e98-87a5-e618ae68bc1b"} 
+{:block/created-at 1719847182734
+:block/properties 
+{:ls-type :whiteboard-shape
+:logseq.tldraw.shape 
+{:blockType "B"
+:stroke ""
+:rotation 0
+:collapsed false
+:borderRadius 8
+:index 0
+:scale [1 1]
+:pageId "66821224-e750-4e0d-9799-e36d504c3160"
+:scaleLevel "md"
+:fill ""
+:compact true
+:isAutoResizing true
+:type "logseq-portal"
+:size [480 45.796875]
+:strokeType "line"
+:strokeWidth 2
+:opacity 1
+:id "1ec75020-37bd-11ef-b388-39a966318c5c"
+:noFill false
+:point [744 304]
+:parentId "6682c777-b67f-486c-bcf6-acb102530109"
+:collapsedHeight 0
+:nonce 1719847087867}}
+:block/updated-at 1719847182734} 
+{:block/created-at 1719847178307
+:block/properties 
+{:ls-type :whiteboard-shape
+:logseq.tldraw.shape 
+{:blockType "B"
+:stroke ""
+:collapsed false
+:borderRadius 8
+:index 1
+:scale [1 1]
+:pageId "6682bb25-d048-4af3-8bda-f3342cc4949e"
+:scaleLevel "md"
+:fill ""
+:compact true
+:isAutoResizing true
+:type "logseq-portal"
+:size [400 74.59375]
+:strokeType "line"
+:strokeWidth 2
+:opacity 1
+:id "390573e0-37bd-11ef-b388-39a966318c5c"
+:noFill false
+:point [744 360]
+:parentId "6682c777-b67f-486c-bcf6-acb102530109"
+:collapsedHeight 0
+:nonce 1719847131804}}
+:block/updated-at 1719847178307} 
+{:block/content "## 《deep reinforcement learning》"
+:block/format :markdown
+:block/left 
+{:block/uuid #uuid "6682c84c-d5d3-4e98-87a5-e618ae68bc1b"}
+:block/parent 
+{:block/uuid #uuid "6682c777-b67f-486c-bcf6-acb102530109"}
+:block/properties 
+{:heading 2}
+:block/uuid #uuid "6682c920-22f6-4514-88da-0822cb79e59e"} 
+{:block/created-at 1719847293616
+:block/properties 
+{:ls-type :whiteboard-shape
+:logseq.tldraw.shape 
+{:blockType "B"
+:stroke ""
+:rotation 0
+:collapsed false
+:borderRadius 8
+:index 2
+:scale [1 1]
+:refs []
+:pageId "6682c920-22f6-4514-88da-0822cb79e59e"
+:scaleLevel "md"
+:fill ""
+:compact true
+:isAutoResizing true
+:type "logseq-portal"
+:size [424 63]
+:strokeType "line"
+:strokeWidth 2
+:opacity 1
+:id "6028fbe0-37bd-11ef-b388-39a966318c5c"
+:noFill false
+:point [744 240]
+:parentId "6682c777-b67f-486c-bcf6-acb102530109"
+:collapsedHeight 0
+:nonce 1719847197511}}
+:block/updated-at 1719847293616} 
+{:block/content ""
+:block/format :markdown
+:block/left 
+{:block/uuid #uuid "6682c920-22f6-4514-88da-0822cb79e59e"}
+:block/parent 
+{:block/uuid #uuid "6682c777-b67f-486c-bcf6-acb102530109"}
+:block/uuid #uuid "6682cdbd-94fa-4831-bffa-838b69862771"} 
+{:block/content ""
+:block/format :markdown
+:block/left 
+{:block/uuid #uuid "6682cdbd-94fa-4831-bffa-838b69862771"}
+:block/parent 
+{:block/uuid #uuid "6682c777-b67f-486c-bcf6-acb102530109"}
+:block/properties 
+{}
+:block/uuid #uuid "6682cdcc-2a8d-4149-9461-cb6b33fdcc32"})
+:pages (
+{:block/uuid #uuid "6682c777-b67f-486c-bcf6-acb102530109"
+:block/properties 
+{:ls-type :whiteboard-page
+:logseq.tldraw.page 
+{:id "6682c777-b67f-486c-bcf6-acb102530109"
+:name "reinforcement learning"
+:bindings 
+{}
+:nonce 1
+:assets []
+:shapes-index ("1ec75020-37bd-11ef-b388-39a966318c5c" "390573e0-37bd-11ef-b388-39a966318c5c" "6028fbe0-37bd-11ef-b388-39a966318c5c")}}
+:block/updated-at 1719848492981
+:block/created-at 1719846775645
+:block/type "whiteboard"
+:block/name "reinforcement learning"
+:block/original-name "reinforcement learning"})}
