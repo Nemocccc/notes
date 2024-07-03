@@ -1,1 +1,1 @@
-### typora is my main working dictionary
+### typora is my main working dictionary，i like typora now
