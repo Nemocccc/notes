@@ -108,7 +108,7 @@ by default, from lest to eight , marked by `(`, the group would automatically ge
   >
   > (?:exp): match but not capture characters and also not assign codes.
 
-- assert:
+- assert: match a position but not consume it.
 
   > (?=exp): matches location before exp, like ^.
   >
@@ -118,6 +118,86 @@ by default, from lest to eight , marked by `(`, the group would automatically ge
   >
   > - `(?<=\bre)\w+\b` match characters after re, such as: reading -> ading, reset ->set.
   >
+  > `(?<=\s)\d+(?=\s)`matches numbers that barrier by blank character.
+  >
   > (?!exp): match a location that not follow by exp
   >
+  > - `\b\w*q[^u]\w*\b`: matches words that have a q that without a u bellow, however it can also match a word that the q is the last letter of the word, for example, it can match`iraq fighting`. and `\b\w*q(?!u)\w*\b` is what you need because (?!u) would not consume the letter bellow the q.
+  > - `\d{3}(?!\d)` match 3 numbers without a number bellow.
+  > - `\b((?!abc)\w)+\b` match a word that do not contain the `abc`.
+  >
   > (?<!exp): match a location that not following exp
+  >
+  > - `(?<![a-z])\d{7}` matches 7 numbers without lowercase letter on the front.
+  >
+  > `(?<=<(\w+)>).*(?=<\/\1>)` matches content in simple HTML label without attributes.
+
+**comment**
+
+use (?#comment) to contain comment like (?#这是注释)
+
+active "ignore blank characters in mode" choice is recommended. and so that you can write commend like this:
+```
+(?<=    # 断言要匹配的文本的前缀
+<(\w+)> # 查找尖括号括起来的内容
+        # (即HTML/XML标签)
+)       # 前缀结束
+.*      # 匹配任意文本
+(?=     # 断言要匹配的文本的后缀
+<\/\1>  # 查找尖括号括起来的内容
+        # 查找尖括号括起来的内容
+)       # 后缀结束
+```
+
+**Greed and laziness**
+
+regex always try to match as much as characters, for example, `aabab`, a.*b can match the whole characters but not only `aab`,  chich called greed.
+
+sometimes we need regex match as less as it can. then we can simply add `?` bellow.
+
+a.*?b match `aab`.
+
+`*?`, `+?`, `??`, `{n, m}`, `{n,}`
+
+**processing option**
+
+`IgnoreCase`: ignore differences between capital letters and lowercase letters.
+
+`Multiline`: change `^` and `$` . now they the beginning and ending of one line, not words.
+
+`Singleline(dotAll)`: change `.`, make it can match all characters (including `\n`), and is not limited in one line.
+
+`IgnorePatternWhitespace`: ignore unescaped white space in expression and active comments marked by #.
+
+`ExplicitCapture`: only capture groups that have been explicitly tag.
+
+***recursive matching**
+
+match nesting multi-levels structure. but hard. omit.
+
+``(?`group`)``, ``(?`-group`)``, ``(?(group)yes|no)``, (?!)
+
+example:
+
+```
+<                   #最外层的左括号
+  [^<>]*            #它后面非括号的内容
+  (
+      (
+        (?'Open'<)  #左括号，压入"Open"
+        [^<>]*      #左括号后面的内容
+      )+
+      (
+        (?'-Open'>) #右括号，弹出一个"Open"
+        [^<>]*      #右括号后面的内容
+      )+
+  )*
+  (?(Open)(?!))     #最外层的右括号前检查
+                    #若还有未弹出的"Open"
+                    #则匹配失败
+
+>                #最外层的右括号
+```
+
+
+
