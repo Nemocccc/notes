@@ -201,5 +201,5 @@ example:
 
 ### ***others***:
 
-![other grammar](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20240710221700778.png)
+![other grammar](./regex_other_grammar.png)
 
