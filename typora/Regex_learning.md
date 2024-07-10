@@ -68,3 +68,56 @@ example: `^\w+`: match the first words in a sentense.
 
 `\(?0\d{2}[)-]?\d{8}`: match phonre numbers start with 0
 
+**if-else**: |
+
+`\(?0\d{2}[)-]?\d{8}` actually can match characters (023-32142131, which is the wrong format.
+
+the right answer is `\(0\d{2}\)[- ]?\d{8}|0\d{2}[- ]?\d{8}`
+
+however, you should focus on the order, for example:
+
+`\d{5}-\d{4}|\d{5}` is right, but `\d{5}|\d(5)-\d{4}` is wrong, because what matches `\d{5}-\d{4}` can match `\d{5}`, so it match `\d{5}` and would not think about the other branches. just like if-else conditions in C++ and python.
+
+**group**: mostly for repetition of multi-characters, and auto-distribute group codes for groups, code 0 refer to the whole expression. 
+
+`(\d{1,3}\.){3}\d{1,3}` repeat 3 times for `\d{1, 3}\.` .
+
+`((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)`: matches right ip address. to under stand this expression, understanding `2[0-4]\d|25[0-5]|[01]?\d\d?`id the most important.
+
+**autonymy**: like ! in python and C++
+
+`\W`（capital, follow the same): `!\w`
+
+`\S` , `\D` , `\B`, 
+
+`[^exp]`: matches any characters except e, x, p
+
+**backrefer**
+
+by default, from lest to eight , marked by `(`, the group would automatically get a code from 1 on.
+
+`\b(\w+)\b\s+\1\b` can match repeated words like `go go`. `\1` here is the content that `\w+` matched such as `go`.
+
+`\b(?<Word>\w+)\b\s+\k<Word>\b`: match repeated words and assign the group with code `word`.
+
+- capture: 
+
+  > (exp): match and capture characters **into groups** and auto assign code.
+  >
+  > (?<name>exp): match and capture cahracters and assign the group `name` as code.
+  >
+  > (?:exp): match but not capture characters and also not assign codes.
+
+- assert:
+
+  > (?=exp): matches location before exp, like ^.
+  >
+  > - `\b\w+(?=ing\b)` match characters before ing, such as:singing -> sing, dancing -> danc
+  >
+  > (?<=exp): matches location after exp,. like $.
+  >
+  > - `(?<=\bre)\w+\b` match characters after re, such as: reading -> ading, reset ->set.
+  >
+  > (?!exp): match a location that not follow by exp
+  >
+  > (?<!exp): match a location that not following exp
