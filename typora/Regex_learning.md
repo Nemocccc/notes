@@ -201,5 +201,5 @@ example:
 
 ### ***others***:
 
-![other grammar](./regex_other_grammar.png)
+![other grammar](./picture/regex_other_grammar.png)
 
