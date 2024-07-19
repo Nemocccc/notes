@@ -375,3 +375,6 @@ clean:
 -include $(DEPS) # include all the prerequisites in makefile can help make better update(why? i dont know)
 ```
 
+however, this can be totally different in windows system.
+
+so, lets join Cmake.
