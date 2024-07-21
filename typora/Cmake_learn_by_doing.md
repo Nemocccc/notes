@@ -213,3 +213,89 @@ in `config.h.in`:
 #cmakedefine USE_MYMATH
 ```
 
+then on bash:
+
+`cmake .` or `cmake -USE_MYMATH OFF` default value is ON.
+
+
+
+#### install and test
+
+install() in cmake use to appoint files, libraries and executable files that should be copied to the system installation directory during the build process. 
+
+add the following to math/CMakeLists.txt:
+
+```cmake
+#specify math library's installing address
+install (TARGETS math DESTINATION bin)
+install (FILES math.h DESTINATION include)
+```
+
+add the following to the ending of root CMakeLists.txt:
+
+```cmake
+install (TARGETS hello DESTINATION bin)
+install (FILES "${PROJECT_BINARY_DIR}/config.h" DESTINATION include)
+```
+
+then hello and libmath.o that generated will be copied to /usr/local/bin, and math.h and config.h will be copied to /usr/local/include. /usr/local is the default installing root address,we can modify variable CMAKE_INSTALL_PREFIX to appoint the target address.
+
+---
+
+cmake provide a tool named CTest ,  if we want our project has a test function, what we need to do is to  add `add_test` in our `CMakeList.txt`.
+
+```cmake
+add_test(NAME <test_name>
+          COMMAND <command> [<arg1> <arg2> ...]
+          [CONFIGURATIONS <config1> [<config2>...]]
+          [WORKING_DIRECTORY <dir>]
+          [COMPILE_DEFINITIONS <def1> [<def2>...]])
+```
+
+in CMakeLists.txt:
+
+```cmake
+enable_testing()
+
+# test weather testing program can run successfully
+add_test (test_run hello) #if hello need parameter, use add_test (test_run hello <pm1> ...)
+
+#test weather help-info can prompt normally
+add_test (test_usage hello)
+set_tests_properties (test_usage
+	PROPERTIES PASS_REGULAR_EXPRESSION "Usage: .* base exponent") #`PASS_REGULAR_EXPRESSION`: check if the output contians the string "Usage: .* base exponent"
+	
+#add_test (test_case_1 hello pm1 pm2)
+#set_tests_properties (test_case_1
+#	PROPERTIES PASS_REGULAR_EXPRESSION "xxx")
+#
+#add_test
+#......
+```
+
+auto-test: **write macro**
+
+:star:example:star:
+
+```cmake
+macro (do_test arg1 arg2 result)#numbers of args depend on your function.
+  add_test (test_${arg1}_${arg2} Demo ${arg1} ${arg2})
+  set_tests_properties (test_${arg1}_${arg2}
+    PROPERTIES PASS_REGULAR_EXPRESSION ${result})
+endmacro (do_test)
+
+#do_test（arg1 arg2 "part of target")
+```
+
+
+
+#### support gdb
+
+active `-g` option in debug mode.
+
+```cmake
+set(CMAKE_BUILD_TYPE "Debug")
+set(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -00 -Wall -g -ggdb")
+set(CMAKE_CXXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -03 -Wall")
+```
+
