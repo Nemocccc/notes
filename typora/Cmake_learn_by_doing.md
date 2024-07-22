@@ -294,8 +294,123 @@ endmacro (do_test)
 active `-g` option in debug mode.
 
 ```cmake
+#setup compile options for different build type
 set(CMAKE_BUILD_TYPE "Debug")
 set(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -00 -Wall -g -ggdb")
 set(CMAKE_CXXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -03 -Wall")
 ```
 
+then you can construct your project in Debug mode:
+
+```bash
+cmake -DCMAKE_BUILD_TYPE=Debug .
+make
+```
+
+start your executable files:
+
+```bash
+gdb ./your exectable
+```
+
+
+
+#### adding environment detection
+
+excample: when we need to use pow() function, first we need to check weather system contains pow()
+
+`check_function_exists(<function_name> <variable>)` if function exists, the value of variable will be TRUE.
+
+- add CheckFunctionExists.cmake macro at root CMakeLists.txt before `configure_file`
+  ```cmake
+  #check if system support pow() function
+  include (${CMAKE_ROOT}/Modules/CheckFunctionExists.cmake)
+  check_function_exists (pow HAVE_POW)
+  ```
+
+- modify config.h.in:
+  ```cmake
+  #cmakedefine HAVE_POW
+  ```
+
+- use macro and function in main.cpp, like:
+  ```c++
+  #ifdef HAVE_POW
+  	std::cout << "now we use standard function" << std::endl;
+  #else
+  	std::cout << "user define function" << std::endl;
+  #endif
+  ```
+
+  
+
+#### adding version number
+
+- ```cmake
+  project(<project name> VERSION x.x.x)
+  ```
+
+- ```cmake
+  #condition version
+  if (condition1)
+  	set(PROJECT_VERSION "1.0.0")
+  else()
+  	set(PROJECT_VERSION "1.0.0")
+  endif()
+  ```
+
+- ```cmake
+  set(<project name>_VERISON_MAJOR 1)
+  set(<project name>_VERSION_MINOR 0)
+  ```
+
+- ```cmake
+  #when store the version number in a single file
+  file(READ "version.txt" PROJECT_VERSION)
+  ```
+
+get version number in source code, for excample, cpp:
+
+```c++
+//config.h.in
+#define hello_VERSION_MAJOR @hello_VERSION_MAJOR@
+#define hellp_VERSION_MINOR @hello_VERSION_MINOR@
+```
+
+do not forget to add `#include "config.h"` in cpp file.
+
+
+
+#### generate installer
+
+at the endding of root CMakeLists.txt, add:
+
+```cmake
+#build a CPack installer
+include (InstallRequiredSystemLibraries)
+set(CPACK_RESOURCE_FILE_LICENSE
+	"${CMAKE_CURRENT_SOURCE_DIR}/License,txt")#ser license
+set(CPACK_PACKAGE_VERSION_MAJOR "${hello_VERSION_MAJOR}")#some CPack variable
+set(CPACK_PACKAGE_VERSION_MINOR "${hello_VERSION_MINOR}")
+include(CPack)
+```
+
+generate binary installer:
+
+```bash
+cpack -C CPackConfig.cmake
+```
+
+generate source code installer:(need compile and install by yourself)
+
+```bash
+cpack -C CPackSourceConfig.cmake
+```
+
+
+
+#### *migrate projects from other platforms to CMake*
+
+- autotools
+- qmake
+- ...
