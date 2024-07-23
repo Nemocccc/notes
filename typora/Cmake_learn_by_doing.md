@@ -388,10 +388,14 @@ at the endding of root CMakeLists.txt, add:
 ```cmake
 #build a CPack installer
 include (InstallRequiredSystemLibraries)
+set(CPACK_GENERATOR "ZIP")
+set(CPACK_PACKAGE_NAME "hello")
 set(CPACK_RESOURCE_FILE_LICENSE
 	"${CMAKE_CURRENT_SOURCE_DIR}/License,txt")#ser license
-set(CPACK_PACKAGE_VERSION_MAJOR "${hello_VERSION_MAJOR}")#some CPack variable
-set(CPACK_PACKAGE_VERSION_MINOR "${hello_VERSION_MINOR}")
+set(CPACK_PACKAGE_VERSION "${VERSION}")
+#set(CPACK_PACKAGE_VERSION_MAJOR "${hello_VERSION_MAJOR}")#some CPack variable
+#set(CPACK_PACKAGE_VERSION_MINOR "${hello_VERSION_MINOR}")
+set(CPACK_PACKAGE_CONTACT "Nemo 1774747097@qq.com")
 include(CPack)
 ```
 
