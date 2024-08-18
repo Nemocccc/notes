@@ -161,7 +161,6 @@ echo $? #if no foobar in sd.sh, it would be 1, if not, it would be 0.
 `convert` : image processing
 
 - `convert input.jpg output.png` : change format.
-  - `convert input.{png, jpg}` : ?
 
 - `convert input.jpg -resize 800x600 output.jpg` : change height and width.
 
@@ -169,3 +168,77 @@ echo $? #if no foobar in sd.sh, it would be 1, if not, it would be 0.
 - `convert input.jpg -rotate 90 output.jpg` : rotate the image.
 - `convert input.jpg -colorspace Gray output.jpg` change color.
 - `convert input.jpg watermark.png -gravity south -composite output.jpg` use another iamge as watermark.
+- `convert image1.jpg image2.jpg -append output.jpg` : combine mult image into one.
+
+---
+
+`{}` : 
+
+1. **brace expansion**
+
+- `touch project{1, 2}/src/test/test{1, 2, 3}.py `: this can touch totally 6 files at two different directory.
+
+- `convert input.{png, jpg}` : ?
+- `touch {foo,bar}/{a..j}` : touch foo/a ~ foo/j , bar/a~bar/j
+- ```bash
+  touch foo/s bar/y
+  diff <(ls foo) <(ls bar)
+  ```
+- 
+
+---
+
+`diff` : 
+
+- `diff file1.txt file2.txt` : find the differents of two files.
+- `diff -rq dir1 dir2` : find the differents of files in two directories.
+- `diff --help`
+
+---
+
+`shellcheck` : shell/bash script debug tool
+
+- ```bash
+  sudo apt-get update && sudo apt-get upgrade
+  sudo apt-get install -y shellcheck
+  ```
+
+- `shellcheck script.py`
+
+- `shellcheck script1.sh script2.sh`
+
+- `shellcheck $(find . -name "*.sh")`
+
+- `shellcheck -s bash -e SC2046 script.sh`
+
+- `shellcheck script.sh > check_results.txt`
+
+---
+
+`man` : manual of commands.
+
+- `man ffmpeg` , `man rg` , `man tldr` and so on , run and u will know.
+
+---
+
+`find` :
+
+- `find . -name src -type d` : find dir that named as src in current dir
+
+- `find . -path '**/test/*.py' -type f` 
+- ` find . -mtime -1` : -mtime -> modify time | -1 -> last day.
+- `find . -name "*.tmp" -exec rm {} \` : `{}` -> all files find matched | `\` -> claim the end of `rm` command
+
+- **fd-find** : better then find
+
+---
+
+`$()` : Used for command substitution, that is, to assign the output of a command to a variable
+
+`${}` : Used for variable expansion, that is, inserting the value of a variable into a string.
+
+
+
+
+
+shell script practice : [shell脚本一天一练-day1_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1ih4y1Y7nh/?spm_id_from=333.788&vd_source=8a614553fd42ac4044499e810a8166aa)
