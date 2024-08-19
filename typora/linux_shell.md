@@ -237,6 +237,25 @@ echo $? #if no foobar in sd.sh, it would be 1, if not, it would be 0.
 
 `${}` : Used for variable expansion, that is, inserting the value of a variable into a string.
 
+---
+
+`seq` : to generate a set of numbers.
+
+- `seq <options> <start> <end>`
+- `seq -f "%02g" 0 9`  : "%02g" => numbers is formatted as the smallest two-digit number
+
+---
+
+
+
+
+
+
+
+
+
+
+
 
 
 
