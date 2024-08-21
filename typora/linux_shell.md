@@ -246,7 +246,81 @@ echo $? #if no foobar in sd.sh, it would be 1, if not, it would be 0.
 
 ---
 
+`sed`: `sed [options] 'command' [file]`
 
+- `s/pattern/replacement/flags`
+
+  ```bash
+  sed 's/oldtest/newtest/g' file.txt #g : global replace , i : ignore case
+  ```
+
+- `sed '/delete the line that match this text/d' file.txt` : yes, the line!
+
+  ```bash
+  zixing.liao@server-235-a4000:/DATACENTER1/zixing.liao/try_something/shellPrac/day3$ cat test.txt
+  hello world
+  llohe wldor
+  sdajkskdhakjd
+  zixing.liao@server-235-a4000:/DATACENTER1/zixing.liao/try_something/shellPrac/day3$ sed '/hello/d' test.txt
+  llohe wldor
+  sdajkskdhakjd
+  ```
+
+- `i\text`: insert text before matched line, `a\text`: insert text after matched line.
+
+  ```bash
+  sed '/match text/a\' #insert a new line after match line
+  ```
+
+- ```bash
+  sed '/match line/p' file.txt # print match words' line in file.txt
+  ```
+
+- `address1,address2 command`: line range
+
+  ```bash
+  sed -n '1,5p' file.txt # print line1~line5
+  ```
+
+- ```bash
+  sed -f script.sed file.txt # read commands from a script and deal file with these commands.
+  ```
+  
+- `df | sed '1d' | grep -v 'tmpfs' | awk '{print $NF}')`
+
+---
+
+`awk` : 
+
+1. To print a specific column:
+   ```bash 
+   awk '{print $column_number}' file
+   ```
+   - For example, print the second column in the file example.txt:
+     ```bash 
+     awk '{print $2}' example.txt
+     ```
+
+2. Number of statistical lines:
+   `awk 'END{print NR}' file`
+   - For example, count the number of lines in the file example.txt:
+     `awk 'END{print NR}' example.txt`
+3. Number of statistical columns:
+   `awk '{print NF}' file`
+   - For example, count the number of columns in the first row of the example.txt file:
+     `awk 'NR==1{print NF}' example.txt`
+4. Filter line:
+   `awk '/pattern/' file`
+   - For example, print the line containing "example" :
+     `awk '/example/' example.txt`
+5. Calculate the sum:
+   `awk '{sum += $column_number} END{print sum}' file`
+   - For example, calculate the sum of the third column in the file example.txt:
+     `awk '{sum += $3} END{print sum}' example.txt`
+6. Condition print:
+   `awk '$column_number > value {print $0}' file`
+   - For example, print the third column greater than 10 in the file example.txt:
+     `awk '$3 > 10 {print $0}' example.txt`
 
 
 
