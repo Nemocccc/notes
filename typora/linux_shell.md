@@ -322,6 +322,18 @@ echo $? #if no foobar in sd.sh, it would be 1, if not, it would be 0.
    - For example, print the third column greater than 10 in the file example.txt:
      `awk '$3 > 10 {print $0}' example.txt`
 
+---
+
+`stat` : `stat [options] <file>`
+
+- `stat file.txt`
+- `stat -h file.txt`
+- `stat -f /`
+- `stat --format="%A %n %s %w %u %g\n" file.txt`
+- `stat -c %a $F`
+
+---
+
 
 
 
