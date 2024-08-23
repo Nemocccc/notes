@@ -334,6 +334,19 @@ echo $? #if no foobar in sd.sh, it would be 1, if not, it would be 0.
 
 ---
 
+`rsync` : `rsync [options] <source> <target>`
+
+- `rsync -avz -e ssh /path/to/source user@remote:/path/to/destination`
+- `rsync -avz -e ssh user@remote:/path/to/source /path/to/destination`
+- `rsync -avu /path/to/source /path/to/destination`
+- `rsync -avz /path/to/source /path/to/destination`
+- `rsync -avhi /path/to/source /path/to/destination`
+- `rsync -avze 'ssh -i /path/to/private_key' /path/to/source user@remote:/path/to/destination`
+- `rsync -av --delete /path/to/source /path/to/destination`
+- `rsync -av --exclude='*.log' --exclude='/tmp/' /path/to/source /path/to/destination`
+
+
+
 
 
 
