@@ -345,6 +345,16 @@ echo $? #if no foobar in sd.sh, it would be 1, if not, it would be 0.
 - `rsync -av --delete /path/to/source /path/to/destination`
 - `rsync -av --exclude='*.log' --exclude='/tmp/' /path/to/source /path/to/destination`
 
+---
+
+***it is very important to wrapped your shell variable with "" when you need to use it***
+
+1. prevent path expanding: 
+   - if value of variable contains space, tab and \n, it can cause some undefined actions.
+   - for example: if  `variable=your name`, and your command `cd $variable` is expanding to `cd your name`, and you know what will happen next, but `cd "$variable"` go as you want
+   - protect special symbols, see "$1."
+   - if value of variable is none, it can cause something you cannot imagine.
+
 
 
 
